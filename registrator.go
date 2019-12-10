@@ -35,6 +35,7 @@ var retryInterval = flag.Int("retry-interval", 2000, "Interval (in millisecond) 
 var cleanup = flag.Bool("cleanup", false, "Remove dangling services")
 var swarmReplicasAware = flag.Bool("swarm-replicas-aware", true, "Remove registered swarm services without replicas")
 var swarmManagerSvcName = flag.String("swarm-manager-servicename", "", "Register swarm manager service when non-empty")
+var swarmSkipIntIngress = flag.Bool("swarm-skip-internal-ingress", false, "Skip ingress network for internal mode")
 
 func getopt(name, def string) string {
 	if env := os.Getenv(name); env != "" {
@@ -155,6 +156,7 @@ func main() {
 		Cleanup:             *cleanup,
 		SwarmReplicasAware:  *swarmReplicasAware,
 		SwarmManagerSvcName: *swarmManagerSvcName,
+		SwarmSkipIntIngress: *swarmSkipIntIngress,
 	})
 
 	assert(err)

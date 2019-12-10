@@ -32,6 +32,7 @@ type Config struct {
 	Cleanup             bool
 	SwarmReplicasAware  bool
 	SwarmManagerSvcName string
+	SwarmSkipIntIngress bool
 }
 
 type Service struct {

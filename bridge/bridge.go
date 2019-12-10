@@ -372,7 +372,20 @@ func (b *Bridge) newService(port ServicePort, isgroup bool) []*Service {
 		var p int
 
 		if b.config.Internal == true {
-			service.IP = port.ExposedIP
+			exists := false
+			if b.config.SwarmSkipIntIngress {
+				for name, network := range container.NetworkSettings.Networks {
+					if name != "ingress" {
+						exists = true
+						service.IP = network.IPAddress
+						log.Printf("service %s will use network %s", service.Name, name)
+						break
+					}
+				}
+			}
+			if !exists {
+				service.IP = port.ExposedIP
+			}
 			p, _ = strconv.Atoi(port.ExposedPort)
 		} else {
 			service.IP = port.HostIP

@@ -54,6 +54,9 @@ Usage of /bin/registrator:
   -tags="": Append tags for all registered services
   -ttl=0: TTL for services (default is no expiry)
   -ttl-refresh=0: Frequency with which service TTLs are refreshed
+  -swarm-manager-servicename="": Register swarm manager service when non-empty
+  -swarm-replicas-aware=true: Remove registered swarm services without replicas (default true)
+  -swarm-skip-internal-ingress=false: Skip ingress network for internal mode
 ```
 
 ## Contributing
